@@ -1,11 +1,13 @@
 /* ---------- Root Variables ---------- */
 :root {
   --green: rgb(38, 76, 89);
+  --dark-green: rgb(9, 47, 59);
   --light-green: rgb(172, 198, 201);
   --light-grey: #f1f1f4;
   --text-color-danger: rgb(152, 58, 58);
   --text-color-dark: #333;
   --text-color-light: #f1f1f1;
+  --text-color-danger: #f44250;
   --white: #f1f1f1;
 }
 
@@ -49,6 +51,16 @@ h3 {
   letter-spacing: 0.1px;
 }
 
+a {
+  color: var(--green);
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+a:hover {
+  color: var(--dark-green);
+}
+
 /* ---------- Form, input and button Styling ---------- */
 
 textarea,
@@ -65,10 +77,17 @@ button {
   margin: 0;
 }
 button {
-  color: #3992ff;
+  color: var(--white);
   font-weight: 500;
   cursor: pointer;
   padding: 1em 2em;
+  background-color: var(--green);
+  transition: 0.5s;
+}
+
+button:hover {
+  background-color: var(--light-green);
+  color: var(--green);
 }
 
 textarea:hover,
@@ -84,7 +103,14 @@ button:active {
 
 form[action$="destroy"] button,
 .btn-cancel {
+  background-color: var(--white);
   color: #f44250;
+}
+
+form[action$="destroy"] button:hover,
+.btn-cancel:hover {
+  background-color: #f44250;
+  color: var(--white);
 }
 
 form input {
@@ -110,11 +136,13 @@ form img {
 
 /* ---------- Post Form Styling ---------- */
 
-#post-form {
+#post-form,
+#sign-in-form,
+#sign-up-form {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 1em;
-  max-width: 50rem;
+  max-width: 60rem;
   align-items: center;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
   padding: 1.5em;
@@ -122,6 +150,11 @@ form img {
   transition: 0.5s;
   animation: fadeIn 0.5s;
   border-radius: 8px;
+}
+
+#sign-in-form,
+#sign-up-form {
+  width: 35rem;
 }
 
 /* ---------- Navigation Styling ---------- */
@@ -134,7 +167,7 @@ nav {
   text-align: center;
   top: 0;
   padding: 1em 2em;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1em;
 }
 
@@ -151,12 +184,13 @@ nav a {
   font-weight: 500;
   font-size: 1.2em;
   border-radius: 8px;
+  transition: 0.5s;
 }
 
 /* Change the color of links on hover */
 nav a:hover {
   background-color: var(--light-green);
-  color: var(--text-color-dark);
+  color: var(--green);
 }
 
 /* Add a color to the active/current link */
@@ -270,4 +304,36 @@ nav a.active {
 
 #post-page .btns {
   padding: 1em 0;
+}
+
+/* ---------- Login Form Styling ---------- */
+#sign-in-page,
+#sign-up-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
+}
+
+.error-message {
+  color: var(--text-color-danger);
+  margin-top: 10px;
+  grid-column: 2;
+}
+
+.logout-button {
+  color: var(--white);
+  font-weight: 500;
+  cursor: pointer;
+  padding: 1em 2em;
+  background-color: var(--green);
+  transition: 0.5s;
+  margin-left: 2rem;
+  
+}
+
+logout-button:hover {
+  background-color: var(--light-green);
+  color: var(--green);
 }

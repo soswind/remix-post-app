@@ -1,10 +1,17 @@
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "@remix-run/react";
 import appStylesHref from "./app.css";
 import Nav from "./components/Nav";
+import { authenticator } from "./services/auth.server";
+
+export async function loader({ request }) {
+    return await authenticator.isAuthenticated(request )};
 
 export const links = () => [{ rel: "stylesheet", href: appStylesHref }];
 
 export default function App() {
+const user = useLoaderData();
+console.log("user");
+
     return (
         <html lang="en">
             <head>
@@ -14,7 +21,7 @@ export default function App() {
                 <Links />
             </head>
             <body>
-                <Nav />
+                {user ? <Nav /> : null}
                 <Outlet />
                 <ScrollRestoration />
                 <Scripts />

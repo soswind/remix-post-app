@@ -2,6 +2,15 @@ import { redirect } from "@remix-run/node";
 import { Form, useNavigate } from "@remix-run/react";
 import mongoose from "mongoose";
 import { useState } from "react";
+import { authenticator } from "../services/auth.server";
+
+export async function loader({ request, params }) {
+  // Sørg for, at brugeren er godkendt, ellers omdiriger til login-siden
+  await authenticator.isAuthenticated(request, { failureRedirect: "/signin" });
+  return {};
+  
+  // Loaderen behøver ikke returnere noget, da dens formål primært er at sikre, at brugeren er godkendt
+}
 
 export const meta = () => {
   return [{ title: "Remix Post App - Add New Post" }];

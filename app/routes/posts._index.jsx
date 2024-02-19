@@ -2,12 +2,16 @@ import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import PostCard from "../components/PostCard";
 import mongoose from "mongoose";
+import { authenticator } from "../services/auth.server.jsx";
 
 export const meta = () => {
   return [{ title: "Remix Post App" }];
 };
 
-export async function loader() {
+export async function loader({ request }) {
+  // Sørg for, at brugeren er godkendt, ellers omdiriger til login-siden
+  await authenticator.isAuthenticated(request, { failureRedirect: "/signin" });
+
   const posts = await mongoose.models.Post.find()
     .sort({ createdAt: -1 })
     .populate("user");
