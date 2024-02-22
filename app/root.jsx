@@ -3,14 +3,15 @@ import appStylesHref from "./app.css";
 import Nav from "./components/Nav";
 import { authenticator } from "./services/auth.server";
 
-export async function loader({ request }) {
-    return await authenticator.isAuthenticated(request )};
 
 export const links = () => [{ rel: "stylesheet", href: appStylesHref }];
 
+export async function loader({ request }) {
+    return await authenticator.isAuthenticated(request );
+}
+
 export default function App() {
 const user = useLoaderData();
-console.log("user");
 
     return (
         <html lang="en">

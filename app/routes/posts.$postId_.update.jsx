@@ -23,6 +23,8 @@ export async function loader({ request, params }) {
   return json({ post });
 }
 
+
+
 export default function UpdatePost() {
   const { post } = useLoaderData();
   const [image, setImage] = useState(post.image);

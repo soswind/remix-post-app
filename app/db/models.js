@@ -1,16 +1,41 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+
 
 // ========== models ========== //
+
 const userSchema = new mongoose.Schema(
   {
     image: String,
-    mail: String,
+    mail: { String,
+      type: String,
+      required: true, // sikre at bruger emails er påkrævet
+      unique: true // sikre at bruger emails er unikke
+  },
     name: String,
     title: String,
-    educations: [String]
+    educations: [String],
+    password: {
+      type: String,
+      required: true, // sikre at bruger passwords er påkrævet
+      select: false // automatisk ekskludere passwords fra alle forespørgsler
+    }
   },
   { timestamps: true }
 );
+
+userSchema.pre("save", async function (next) {
+  const user = this; // henviser til bruger dokumentet
+
+  // hash kun passwrod hvis det er blevet ændret (eller er nyt)
+  if (!user.isModified("password")) {
+    return next(); // fortsæt
+  }
+
+  const salt = await bcrypt.genSalt(10); // generer et salt
+  user.password = await bcrypt.hash(user.password, salt); // hash brugerens password
+  next(); // fortsæt
+});
 
 const postSchema = new mongoose.Schema(
   {
@@ -19,8 +44,7 @@ const postSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      default: new mongoose.Types.ObjectId("65cde4cb0d09cb615a23db17")
-    },
+        },
     likes: Number,
     tags: [String]
   },
@@ -62,7 +86,8 @@ async function insertData() {
     mail: "mlbe@eaaa.dk",
     name: "Maria Louise Bendixen",
     title: "Senior Lecturer",
-    educations: ["Multimedia Design"]
+    educations: ["Multimedia Design"],
+    password: "1234"
   });
 
   const rasmus = await User.create({
@@ -71,7 +96,8 @@ async function insertData() {
     mail: "race@eaaa.dk",
     name: "Rasmus Cederdorff",
     title: "Senior Lecturer",
-    educations: ["Multimedia Design", "Web Development", "Digital Concept Development"]
+    educations: ["Multimedia Design", "Web Development", "Digital Concept Development"],
+    password: "1234"
   });
 
   const anne = await User.create({
@@ -80,7 +106,8 @@ async function insertData() {
     mail: "anki@eaaa.dk",
     name: "Anne Kirketerp",
     title: "Head of Department",
-    educations: ["Multimedia Design", "Web Development", "Digital Concept Development"]
+    educations: ["Multimedia Design", "Web Development", "Digital Concept Development"],
+    password: "1234"
   });
 
   const line = await User.create({
@@ -88,7 +115,8 @@ async function insertData() {
     mail: "lskj@eaaa.dk",
     name: "Line Skjødt",
     title: "Senior Lecturer & Internship Coordinator",
-    educations: ["Multimedia Design"]
+    educations: ["Multimedia Design"],
+    password: "1234"
   });
 
   const dan = await User.create({
@@ -97,7 +125,8 @@ async function insertData() {
     mail: "dob@eaaa.dk",
     name: "Dan Okkels Brendstrup",
     title: "Lecturer",
-    educations: ["Web Development"]
+    educations: ["Web Development"],
+    password: "1234"
   });
 
   // Insert posts
