@@ -13,12 +13,21 @@ export async function loader({ request }) {
   const session = await sessionStorage.getSession(request.headers.get("Cookie"));
   // Get the error message from the session
   const error = session.get("sessionErrorKey");
-  return json({ error }); // return the error message
+
+  session.unset("sessionErrorKey");
+
+  const headers = new Headers({
+    "Set-Cookie": await sessionStorage.commitSession(session),
+  });
+
+  return json({ error }, { headers }); // return the error message
 }
 
 export default function SignUp() {
   // if i got an error it will come back with the loader dxata
   const loaderData = useLoaderData();
+  console.log("error", loaderData?.error);
+
   return (
     <div id="sign-up-page" className="page">
       <h1>Sign Up</h1>

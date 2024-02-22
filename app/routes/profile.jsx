@@ -29,5 +29,6 @@ export default function Profile() {
 
 
 export async function action({ request }) {
-  await authenticator.logout(request, { redirectTo: "/signin" });
+  await authenticator.logout(request, 
+    { redirectTo: "/signin" });
 }

@@ -90,13 +90,24 @@ export default function UpdatePost() {
 }
 
 export async function action({ request, params }) {
+  const authUser = await authenticator.isAuthenticated(request, {
+    failureRedirect: "/signin"
+  });
+  
+  const postToUpdate = await mongoose.models.Post.findById(params.postId);
+
+  if (postToUpdate.user.toString() !== authUser._id.toString()) {
+    return redirect(`/posts/${params.postId}`);
+  }
+
+
   const formData = await request.formData();
   const post = Object.fromEntries(formData);
 
-  await mongoose.models.Post.findByIdAndUpdate(params.postId, {
-    caption: post.caption,
-    image: post.image
-  });
+  postToUpdate.caption = post.caption;
+  postToUpdate.image = post.image;
+  await postToUpdate.save();
+
 
   return redirect(`/posts/${params.postId}`);
 }

@@ -14,20 +14,19 @@ export function meta({ data }) {
 }
 
 export async function loader({ request, params }) {
-  await authenticator.isAuthenticated(request, {
+
+  const authUser = await authenticator.isAuthenticated(request, {
     failureRedirect: "/signin"
   }
   );
 
-  const post = await mongoose.models.Post.findById(params.postId).populate(
-    "user"
-  );
-  return json({ post });
+  const post = await mongoose.models.Post.findById(params.postId).populate("user");
+  return json({ post, authUser });
 }
 
 
 export default function Post() {
-  const { post } = useLoaderData();
+  const { post, authUser } = useLoaderData();
 
   function confirmDelete(event) {
     const response = confirm("Please confirm you want to delete this post.");
@@ -40,6 +39,7 @@ export default function Post() {
     <div id="post-page" className="page">
       <h1>{post.caption}</h1>
       <PostCard post={post} />
+      {authUser._id === post.user._id && (
       <div className="btns">
         <Form action="update">
           <button>Update</button>
@@ -48,6 +48,7 @@ export default function Post() {
           <button>Delete</button>
         </Form>
       </div>
+      )}
     </div>
   );
 }
