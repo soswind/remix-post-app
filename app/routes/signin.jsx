@@ -30,22 +30,22 @@ export default function SignIn() {
 
     return (
       <div id="sign-in-page" className="page">
-        <h1>Sign In</h1>
+        <h1>Log ind</h1>
         <Form id="sign-in-form" method="post">
           <label htmlFor="mail">Mail</label>
-          <input id="mail" type="email" name="mail" aria-label="mail" placeholder="Type your mail..." required />
+          <input id="mail" type="email" name="mail" aria-label="mail" placeholder="Indtast din mail..." required />
   
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Adgangskode</label>
           <input
             id="password"
             type="password"
             name="password"
             aria-label="password"
-            placeholder="Type your password..."
+            placeholder="Indtast din adgangskode..."
             autoComplete="current-password"
           />
           <div className="btns">
-            <button>Sign In</button>
+            <button>Log ind</button>
           </div>
   
           {loaderData?.error ? (
@@ -55,7 +55,7 @@ export default function SignIn() {
           ) : null}
         </Form>
         <p>
-          No account? <NavLink to="/signup">Sign up here.</NavLink>
+          Har du ingen konto? <NavLink to="/signup">Tilmeld dig her.</NavLink>
         </p>
       </div>
     );

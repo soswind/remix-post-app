@@ -57,18 +57,18 @@ export default function UpdatePost() {
           name="caption"
           type="text"
           aria-label="caption"
-          placeholder="Write a caption..."
+          placeholder="Indtast en caption..."
         />
-        <label htmlFor="image">Image URL</label>
+        <label htmlFor="image">Billede URL</label>
         <input
           name="image"
           defaultValue={post.image}
           type="url"
           onChange={e => setImage(e.target.value)}
-          placeholder="Paste an image URL..."
+          placeholder="Indtast billede URL..."
         />
 
-        <label htmlFor="image-preview">Image Preview</label>
+        <label htmlFor="image-preview">Preview</label>
         <img
           id="image-preview"
           className="image-preview"
@@ -79,9 +79,9 @@ export default function UpdatePost() {
 
         <input name="uid" type="text" defaultValue={post.uid} hidden />
         <div className="btns">
-          <button>Save</button>
+          <button>Gem</button>
           <button type="button" className="btn-cancel" onClick={handleCancel}>
-            Cancel
+            Annuller
           </button>
         </div>
       </Form>

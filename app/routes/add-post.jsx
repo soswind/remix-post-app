@@ -26,15 +26,15 @@ export default function AddPost() {
 
   return (
     <div className="page">
-      <h1>Add a Post</h1>
+      <h1>Tilføj Post</h1>
       <Form id="post-form" method="post">
         <label htmlFor="caption">Caption</label>
-        <input id="caption" name="caption" type="text" aria-label="caption" placeholder="Write a caption..." />
+        <input id="caption" name="caption" type="text" aria-label="caption" placeholder="Indtast en caption..." />
 
-        <label htmlFor="image">Image URL</label>
-        <input name="image" type="url" onChange={e => setImage(e.target.value)} placeholder="Paste an image URL..." />
+        <label htmlFor="image">Billede URL</label>
+        <input name="image" type="url" onChange={e => setImage(e.target.value)} placeholder="Indtast billede URL..." />
 
-        <label htmlFor="image-preview">Image Preview</label>
+        <label htmlFor="image-preview">Preview</label>
         <img
           id="image-preview"
           className="image-preview"
@@ -44,9 +44,9 @@ export default function AddPost() {
         />
 
         <div className="btns">
-          <button>Save</button>
+          <button>Gem</button>
           <button type="button" className="btn-cancel" onClick={handleCancel}>
-            Cancel
+            Annuller
           </button>
         </div>
       </Form>
@@ -57,6 +57,9 @@ export default function AddPost() {
 export async function action({ request }) {
   const user = await authenticator.isAuthenticated(request, {
      failureRedirect: "/signin" });
+
+
+     
     
 
   const formData = await request.formData();

@@ -31,26 +31,57 @@ export default function SignUp() {
   return (
     <div id="sign-up-page" className="page">
       <h1>Sign Up</h1>
+
       <Form id="sign-up-form" method="post">
+      <label htmlFor="name">Navn</label>
+      <input
+        id="name"
+        type="text"
+        name="name"
+        aria-label="name"
+        placeholder="Indtast dit fulde navn..."
+        required
+      />
+
+      <label htmlFor="title">Titel</label>
+      <input
+        id="title"
+        type="text"
+        name="title"
+        aria-label="title"
+        placeholder="Indtast din titel..."
+        required
+      />
+
+      <label htmlFor="image">Billede</label>
+      <input
+        id="image"
+        type="text"
+        name="image"
+        aria-label="image"
+        placeholder="Indtast URL til dit billede..."
+        required
+      />
+      
         <label htmlFor="mail">Mail</label>
         <input
           id="mail"
           type="email"
           name="mail"
           aria-label="mail"
-          placeholder="Type your mail..."
+          placeholder="Indtast din mail..."
           required
           autoComplete="off"
         />
 
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Adgangskode</label>
 
         <input
           id="password"
           type="password"
           name="password"
           aria-label="password"
-          placeholder="Type your password..."
+          placeholder="Indtast din adgangskode..."
           autoComplete="current-password"
         />
         <div className="btns">
