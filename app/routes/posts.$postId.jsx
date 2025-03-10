@@ -42,10 +42,10 @@ export default function Post() {
       {authUser._id === post.user._id && (
       <div className="btns">
         <Form action="update">
-          <button>Update</button>
+          <button>Updater</button>
         </Form>
         <Form action="destroy" method="post" onSubmit={confirmDelete}>
-          <button>Delete</button>
+          <button>Slet</button>
         </Form>
       </div>
       )}

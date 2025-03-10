@@ -14,12 +14,12 @@ export default function Profile() {
 
   return (
     <div className="page">
-      <h1>Profile</h1>
-      <p>Mail: {user.mail}</p>
-      <p>Name: {user.name}</p>
-      <p>Title: {user.title}</p>
+      <h1>Din Profil</h1>
+      <p>E-mail: {user.mail}</p>
+      <p>Navn: {user.name}</p>
+      <p>Titel: {user.title}</p>
       <Form method="post">
-        <button>Logout</button>
+        <button>Log ud</button>
       </Form>
     </div>
   );

@@ -11,7 +11,7 @@ export async function loader({ request, params }) {
   return {};
 }
 
-export async function action({ params }) {
+export async function action({ request, params }) {
   await authenticator.isAuthenticated(request, 
     { failureRedirect: "/signin" });
 
